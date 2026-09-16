@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Ertin Aini Farhatin!</title>
+  <!-- Google Font Style Pixel & Modern -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom, #2b1055, #7597de);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      overflow-x: hidden;
+      padding: 20px 0;
+    }
+
+    /* Container Utama */
+    .card-container {
+      background: #fbf7ee;
+      border: 4px solid #4a3b32;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 450px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      text-align: center;
+      position: relative;
+    }
+
+    /* Header Pixel Art */
+    .pixel-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 14px;
+      color: #ff5964;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      color: #6b5b95;
+      margin-bottom: 20px;
+    }
+
+    /* Pemutar Galeri Foto */
+    .gallery-box {
+      background: #fff;
+      border: 2px dashed #4a3b32;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+    .gallery-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+    .caption {
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #555;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Navigasi Slide Galeri */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .btn {
+      background: #ff5964;
+      color: white;
+      border: 2px solid #4a3b32;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #4a3b32;
+      transition: all 0.1s ease;
+    }
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px #4a3b32;
+    }
+
+    /* Fitur Musik & Surat */
+    .extra-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .btn-secondary {
+      background: #35a7ff;
+    }
+
+    /* Modal Pop-up Surat */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      padding: 20px;
+    }
+    .modal-content {
+      background: #fff8e7;
+      border: 3px solid #4a3b32;
+      padding: 24px;
+      border-radius: 12px;
+      max-width: 400px;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.6;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .modal-content h3 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 11px;
+      margin-bottom: 14px;
+      color: #ff5964;
+      line-height: 1.5;
+    }
+    .close-btn {
+      margin-top: 15px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-container">
+    <div class="pixel-title">HAPPY BIRTHDAY!</div>
+    <div class="subtitle">FOR ERTIN AINI FARHATIN</div>
+
+    <!-- Slide Foto -->
+    <div class="gallery-box">
+      <img id="slide-img" class="gallery-img" src="1.jpg" alt="Foto Kenangan">
+      <div id="slide-caption" class="caption">Moment 1: First memory with u ✨</div>
+    </div>
+
+    <!-- Tombol Navigasi Slide -->
+    <div class="nav-buttons">
+      <button class="btn" onclick="prevSlide()">< Prev</button>
+      <span id="slide-number" style="font-size: 12px; font-weight: bold;">1 / 11</span>
+      <button class="btn" onclick="nextSlide()">Next ></button>
+    </div>
+
+    <!-- Aksi Tambahan -->
+    <div class="extra-actions">
+      <button class="btn btn-secondary" onclick="toggleAudio()" id="music-btn">🎵 Play Music</button>
+      <button class="btn" style="background:#ffc107;" onclick="openLetter()">📜 Buka Surat</button>
+    </div>
+  </div>
+
+  <!-- Audio Player Latar -->
+  <audio id="bg-music" loop>
+    <source src="audio.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung pemutar audio.
+  </audio>
+
+  <!-- Modal Surat Pop-up (Gaya Gen Z) -->
+  <div class="modal" id="letter-modal">
+    <div class="modal-content">
+      <h3>For My Favorite Person 💌</h3>
+      <p>Happy birthday, Ertin! 🎉✨</p>
+      <br>
+      <p>Beneran deh, time flies bgt ya! Makasih ya udah selalu jadi tempat cerita paling nyaman, partner random, dan orang yang selalu bisa bikin hari-hariku jadi jauh lebih berwarna.</p>
+      <br>
+      <p>Di umur kamu yang baru ini, pokoknya wish aku simpel aja: semoga kamu selalu bahagia, urusan & impian kamu dipermudah satu per satu, plus jangan gampang overthinking ya! 💖</p>
+      <br>
+      <p>Tetep jadi Ertin yang seru dan gemes kaya yang aku kenal. I'm so lucky and grateful to have you in my life.</p>
+      <br>
+      <p>Enjoy your special day, bub! 🎂✨</p>
+      <button class="btn close-btn" onclick="closeLetter()">Tutup Surat</button>
+    </div>
+  </div>
+
+  <script>
+    // Data 11 Foto dan Caption
+    const slides = [
+      { img: "1.jpg", caption: "Moment 1: First memory with u ✨" },
+      { img: "2.jpg", caption: "Moment 2: Senyum kamu yang selalu bikin candu 😊" },
+      { img: "3.jpg", caption: "Moment 3: Random date tapi seru bgt 🚗" },
+      { img: "4.jpg", caption: "Moment 4: Suka bgt sama foto yang ini 🌸" },
+      { img: "5.jpg", caption: "Moment 5: Another core memory with u 📸" },
+      { img: "6.jpg", caption: "Moment 6: Ngeliat kamu ketawa tuh paling paling 💖" },
+      { img: "7.jpg", caption: "Moment 7: Makasih ya udah selalu nemenin ☕" },
+      { img: "8.jpg", caption: "Moment 8: Simple day, but special because of u 🎈" },
+      { img: "9.jpg", caption: "Moment 9: Every second with u matters ⏳" },
+      { img: "10.jpg", caption: "Moment 10: One of my favorite moments 💌" },
+      { img: "11.jpg", caption: "Moment 11: Happy Birthday, Ertin Aini Farhatin! 🎉❤️" }
+    ];
+
+    let currentIndex = 0;
+
+    function updateSlide() {
+      document.getElementById('slide-img').src = slides[currentIndex].img;
+      document.getElementById('slide-caption').innerText = slides[currentIndex].caption;
+      document.getElementById('slide-number').innerText = `${currentIndex + 1} / ${slides.length}`;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateSlide();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateSlide();
+    }
+
+    // Musik Toggle
+    const music = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-btn');
+
+    function toggleAudio() {
+      if (music.paused) {
+        music.play();
+        musicBtn.innerText = "⏸️ Pause";
+      } else {
+        music.pause();
+        musicBtn.innerText = "🎵 Play Music";
+      }
+    }
+
+    // Modal Surat
+    function openLetter() {
+      document.getElementById('letter-modal').style.display = 'flex';
+    }
+
+    function closeLetter() {
+      document.getElementById('letter-modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday, Ertin Aini Farhatin!</title>
-  <!-- Google Font Style Pixel & Modern -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -14,7 +13,9 @@
     }
     body {
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(to bottom, #2b1055, #7597de);
+      background: linear-gradient(-45deg, #1a0b2e, #2b1055, #4c2885, #7597de);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -24,20 +25,32 @@
       padding: 20px 0;
     }
 
-    /* Container Utama */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Container Utama dengan Efek Floating */
     .card-container {
-      background: #fbf7ee;
+      background: rgba(251, 247, 238, 0.96);
+      backdrop-filter: blur(8px);
       border: 4px solid #4a3b32;
-      border-radius: 16px;
+      border-radius: 20px;
       width: 90%;
       max-width: 450px;
       padding: 24px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
       text-align: center;
       position: relative;
+      animation: floatCard 4s ease-in-out infinite;
     }
 
-    /* Header Pixel Art */
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
     .pixel-title {
       font-family: 'Press Start 2P', cursive;
       font-size: 14px;
@@ -52,13 +65,15 @@
       margin-bottom: 20px;
     }
 
-    /* Pemutar Galeri Foto */
+    /* Frame Galeri Foto & Animasi Transisi Halaman */
     .gallery-box {
       background: #fff;
       border: 2px dashed #4a3b32;
       border-radius: 12px;
       padding: 12px;
       margin-bottom: 16px;
+      overflow: hidden;
+      perspective: 1000px;
     }
     .gallery-img {
       width: 100%;
@@ -66,7 +81,38 @@
       object-fit: cover;
       border-radius: 8px;
       display: block;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
+
+    /* Class Animasi Ganti Halaman/Slide */
+    .slide-next-out {
+      animation: slideNextOut 0.3s forwards ease-in;
+    }
+    .slide-next-in {
+      animation: slideNextIn 0.3s forwards ease-out;
+    }
+    .slide-prev-out {
+      animation: slidePrevOut 0.3s forwards ease-in;
+    }
+    .slide-prev-in {
+      animation: slidePrevIn 0.3s forwards ease-out;
+    }
+
+    @keyframes slideNextOut {
+      to { transform: translateX(-100%) rotateY(-20deg); opacity: 0; }
+    }
+    @keyframes slideNextIn {
+      from { transform: translateX(100%) rotateY(20deg); opacity: 0; }
+      to { transform: translateX(0) rotateY(0deg); opacity: 1; }
+    }
+    @keyframes slidePrevOut {
+      to { transform: translateX(100%) rotateY(20deg); opacity: 0; }
+    }
+    @keyframes slidePrevIn {
+      from { transform: translateX(-100%) rotateY(-20deg); opacity: 0; }
+      to { transform: translateX(0) rotateY(0deg); opacity: 1; }
+    }
+
     .caption {
       margin-top: 10px;
       font-size: 13px;
@@ -78,7 +124,7 @@
       justify-content: center;
     }
 
-    /* Navigasi Slide Galeri */
+    /* Button Navigasi */
     .nav-buttons {
       display: flex;
       justify-content: space-between;
@@ -89,35 +135,40 @@
       background: #ff5964;
       color: white;
       border: 2px solid #4a3b32;
-      padding: 8px 16px;
+      padding: 10px 18px;
       border-radius: 8px;
       font-family: 'Press Start 2P', cursive;
       font-size: 10px;
       cursor: pointer;
-      box-shadow: 2px 2px 0px #4a3b32;
-      transition: all 0.1s ease;
+      box-shadow: 3px 3px 0px #4a3b32;
+      transition: all 0.15s ease;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0px #4a3b32;
     }
     .btn:active {
       transform: translate(2px, 2px);
-      box-shadow: 0px 0px 0px #4a3b32;
+      box-shadow: 1px 1px 0px #4a3b32;
     }
 
-    /* Fitur Musik & Surat */
     .extra-actions {
       display: flex;
-      gap: 10px;
       justify-content: center;
     }
-    .btn-secondary {
-      background: #35a7ff;
+    .btn-letter {
+      background: #ffc107;
+      color: #333;
+      width: 100%;
     }
 
-    /* Modal Pop-up Surat */
+    /* Modal Surat Pop-up */
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
       justify-content: center;
       align-items: center;
       z-index: 100;
@@ -127,14 +178,21 @@
       background: #fff8e7;
       border: 3px solid #4a3b32;
       padding: 24px;
-      border-radius: 12px;
+      border-radius: 16px;
       max-width: 400px;
       text-align: left;
       font-size: 14px;
       line-height: 1.6;
       max-height: 80vh;
       overflow-y: auto;
+      animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
     .modal-content h3 {
       font-family: 'Press Start 2P', cursive;
       font-size: 11px;
@@ -145,6 +203,8 @@
     .close-btn {
       margin-top: 15px;
       width: 100%;
+      background: #ff5964;
+      color: white;
     }
   </style>
 </head>
@@ -154,36 +214,34 @@
     <div class="pixel-title">HAPPY BIRTHDAY!</div>
     <div class="subtitle">FOR ERTIN AINI FARHATIN</div>
 
-    <!-- Slide Foto -->
+    <!-- Frame Foto -->
     <div class="gallery-box">
       <img id="slide-img" class="gallery-img" src="1.jpg" alt="Foto Kenangan">
       <div id="slide-caption" class="caption">Moment 1: First memory with u ✨</div>
     </div>
 
-    <!-- Tombol Navigasi Slide -->
+    <!-- Navigasi Slide -->
     <div class="nav-buttons">
-      <button class="btn" onclick="prevSlide()">< Prev</button>
+      <button class="btn" onclick="changeSlide(-1)">< Prev</button>
       <span id="slide-number" style="font-size: 12px; font-weight: bold;">1 / 11</span>
-      <button class="btn" onclick="nextSlide()">Next ></button>
+      <button class="btn" onclick="changeSlide(1)">Next ></button>
     </div>
 
-    <!-- Aksi Tambahan -->
+    <!-- Tombol Buka Surat (Tanpa Ikon) -->
     <div class="extra-actions">
-      <button class="btn btn-secondary" onclick="toggleAudio()" id="music-btn">🎵 Play Music</button>
-      <button class="btn" style="background:#ffc107;" onclick="openLetter()">📜 Buka Surat</button>
+      <button class="btn btn-letter" onclick="openLetter()">Buka Surat</button>
     </div>
   </div>
 
-  <!-- Audio Player Latar -->
+  <!-- Audio Player Autoplay -->
   <audio id="bg-music" loop>
     <source src="audio.mp3" type="audio/mpeg">
-    Browser kamu tidak mendukung pemutar audio.
   </audio>
 
-  <!-- Modal Surat Pop-up (Gaya Gen Z) -->
+  <!-- Modal Surat -->
   <div class="modal" id="letter-modal">
     <div class="modal-content">
-      <h3>For My Favorite Person 💌</h3>
+      <h3>For My Favorite Person</h3>
       <p>Happy birthday, Ertin! 🎉✨</p>
       <br>
       <p>Beneran deh, time flies bgt ya! Makasih ya udah selalu jadi tempat cerita paling nyaman, partner random, dan orang yang selalu bisa bikin hari-hariku jadi jauh lebih berwarna.</p>
@@ -214,35 +272,34 @@
     ];
 
     let currentIndex = 0;
-
-    function updateSlide() {
-      document.getElementById('slide-img').src = slides[currentIndex].img;
-      document.getElementById('slide-caption').innerText = slides[currentIndex].caption;
-      document.getElementById('slide-number').innerText = `${currentIndex + 1} / ${slides.length}`;
-    }
-
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % slides.length;
-      updateSlide();
-    }
-
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-      updateSlide();
-    }
-
-    // Musik Toggle
+    const imgEl = document.getElementById('slide-img');
+    const captionEl = document.getElementById('slide-caption');
     const music = document.getElementById('bg-music');
-    const musicBtn = document.getElementById('music-btn');
 
-    function toggleAudio() {
-      if (music.paused) {
-        music.play();
-        musicBtn.innerText = "⏸️ Pause";
-      } else {
-        music.pause();
-        musicBtn.innerText = "🎵 Play Music";
+    // Autoplay Musik saat pertama kali ada interaksi klik di layar
+    let musicStarted = false;
+    document.body.addEventListener('click', () => {
+      if (!musicStarted) {
+        music.play().catch(() => {});
+        musicStarted = true;
       }
+    }, { once: true });
+
+    // Fungsi Transisi Slide Bergaya Halaman Buku/Kartu
+    function changeSlide(direction) {
+      const outClass = direction === 1 ? 'slide-next-out' : 'slide-prev-out';
+      const inClass = direction === 1 ? 'slide-next-in' : 'slide-prev-in';
+
+      imgEl.className = `gallery-img ${outClass}`;
+
+      setTimeout(() => {
+        currentIndex = (currentIndex + direction + slides.length) % slides.length;
+        imgEl.src = slides[currentIndex].img;
+        captionEl.innerText = slides[currentIndex].caption;
+        document.getElementById('slide-number').innerText = `${currentIndex + 1} / ${slides.length}`;
+
+        imgEl.className = `gallery-img ${inClass}`;
+      }, 250);
     }
 
     // Modal Surat
